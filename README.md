@@ -92,7 +92,7 @@ echo = `date` job $JOB_NAME
 
 ```
 
-## TO RUN THE JOB
+### TO RUN THE JOB
 The user must provide two items to script for the job to run.
 
 1. SAMPLEDIR_TRM="path to trimmed reads"
