@@ -1,5 +1,12 @@
 # Run getorganelle on hydra using a loop
-This scritp will run getorganelle in hydra using trimmed raw reads in a loop.
+### Summary
+This scritp will run getorganelle on hydra using trimmed raw reads in a loop.
+Results for all samples will be in a directory named 'getorganelle_All_results'. Within this directory will be results for each sample in directories labeled with sample IDs followed by '_getorganelle_results'.
+
+After getorganelle is run, the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These files will be in a directory named 'mt_contigs' within the 'getorganelle_All_results' directory.
+
+For instuctions on how to run the job, see 'TO RUN THE JOB' below.
+
 
 ```
 #!/bin/sh
@@ -27,7 +34,7 @@ mkdir -p getorganelle_All_results
 SAMPLEDIR_TRM="path to trimmed reads"
 
 # Set sample directory path to the base project directory
-SAMPLEDIR_BASE="path to base sample directory, where the job file is."  
+SAMPLEDIR_BASE="path to base base directory, where the job file is."  
 
 # Make a results directory
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/
@@ -84,5 +91,19 @@ echo "All files renamed and processed."
 echo = `date` job $JOB_NAME
 
 ```
+
+## TO RUN THE JOB
+The user must provide two items to script for the job to run.
+
+1. SAMPLEDIR_TRM="path to trimmed reads"
+
+After the '=' paste the full path to the trimmed reads directory. Leave the quotes.
+
+2. SAMPLEDIR_BASE="path to base sample directory, where the job file is."
+
+Aftter the '=' paste the full path to base directory. Leave the quotes. This directory is where the job file is located. The results will be located in this directory.
+
+
+
 
 
