@@ -5,7 +5,7 @@ Results for all samples will be in a directory named 'getorganelle_All_results'.
 
 After getorganelle is run, the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These files will be in a directory named 'mt_contigs' within the 'getorganelle_All_results' directory.
 
-For instuctions on how to run the job, see 'TO RUN THE JOB' below.
+For instuctions on how to run the job, see 'To Run the Job' below.
 
 
 ```
@@ -92,7 +92,7 @@ echo = `date` job $JOB_NAME
 
 ```
 
-### TO RUN THE JOB
+### To Run the Job
 The user must provide two items to script for the job to run.
 
 1. SAMPLEDIR_TRM="path to trimmed reads"
@@ -101,8 +101,9 @@ After the '=' paste the full path to the trimmed reads directory. Leave the quot
 
 2. SAMPLEDIR_BASE="path to base sample directory, where the job file is."
 
-Aftter the '=' paste the full path to base directory. Leave the quotes. This directory is where the job file is located. The results will be located in this directory.
+After the '=' paste the full path to base directory. This directory is where the job file is located.  Leave the quotes. The results will be located in this directory.
 
+After making the changes above, save the job file as 'getorganelle_loop.job' and submit it on hydra (qsub getorganelle_loop.job).
 
 
 
