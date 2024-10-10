@@ -94,7 +94,7 @@ echo = `date` job $JOB_NAME
 ### To Run the Job
 The trimmed reads files must end in '_R1_PE_trimmed.fastq.gz' (forward) and '_R2_PE_trimmed.fastq.gz' (reverse) for the job to work. Alternatively, the job file can be edited to match the trimmed R1 and R2 file names.
 
-Two items need to be added for the job to run.
+Add these items to the script.
 
 1. SAMPLEDIR_TRM="path to trimmed reads directory"
 
