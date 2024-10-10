@@ -1,9 +1,11 @@
 # Run getorganelle on hydra using a loop
 ### Summary
-This scritp will run getorganelle on hydra using trimmed raw reads in a loop.
+This scritp will run getorganelle on hydra using trimmed reads in a loop. The trimmed reads files must end in '_R1_PE_trimmed.fastq.gz' (forward) and '_R2_PE_trimmed.fastq.gz' (reverse) for the job to work. Alternatively, the job file can be edited to match the R1 and R2 file names of the trimmed reads.
+
 Results for all samples will be in a directory named 'getorganelle_All_results'. Within this directory will be results for each sample in directories labeled with sample IDs followed by '_getorganelle_results'.
 
-After getorganelle is run, the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These files will be in a directory named 'mt_contigs' within the 'getorganelle_All_results' directory.
+After getorganelle is run, the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These renamed contigs will be in a directory named 'mt_contigs' within the 'getorganelle_All_results' directory.
+
 
 For instuctions on how to run the job, see 'To Run the Job' below.
 
@@ -31,10 +33,10 @@ echo + NSLOTS = $NSLOTS
 mkdir -p getorganelle_All_results
 
 # Set sample directory path to trimmed reads
-SAMPLEDIR_TRM="path to trimmed reads"
+SAMPLEDIR_TRM="path to trimmed reads directory"
 
 # Set sample directory path to the base project directory
-SAMPLEDIR_BASE="path to base base directory, where the job file is."  
+SAMPLEDIR_BASE="path to base project directory, where the job file is."  
 
 # Make a results directory
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/
@@ -95,13 +97,13 @@ echo = `date` job $JOB_NAME
 ### To Run the Job
 The user must provide two items to script for the job to run.
 
-1. SAMPLEDIR_TRM="path to trimmed reads"
+1. SAMPLEDIR_TRM="path to trimmed reads directory"
 
-After the '=' paste the full path to the trimmed reads directory. Leave the quotes.
+After the '=' paste the full path to the trimmed reads directory.
 
-2. SAMPLEDIR_BASE="path to base sample directory, where the job file is."
+2. SAMPLEDIR_BASE="path to base project directory, where the job file is."
 
-After the '=' paste the full path to base directory. This directory is where the job file is located.  Leave the quotes. The results will be located in this directory.
+After the '=' paste the full path to base directory. This directory is where the job file is located. The results will be located in this directory.
 
 After making the changes above, save the job file as 'getorganelle_loop.job' and submit it on hydra (qsub getorganelle_loop.job).
 
