@@ -26,8 +26,6 @@ module load bio/getorganelle
 echo + `date` job $JOB_NAME started in $QUEUE with jobID=$JOB_ID on $HOSTNAME
 echo + NSLOTS = $NSLOTS
 
-# Create output directory if it doesn't exist
-mkdir -p getorganelle_All_results
 
 # Set sample directory path to trimmed reads
 SAMPLEDIR_TRM="path to trimmed reads directory"
