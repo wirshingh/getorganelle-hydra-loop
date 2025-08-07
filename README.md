@@ -12,7 +12,7 @@ For instuctions on how to run the job, see 'To Run the Job' below.
 # ----------------Parameters---------------------- #
 #$ -S /bin/sh
 #$ -pe mthread 6
-#$ -q sThC.q
+#$ -q mThC.q
 #$ -l mres=48G,h_data=8G,h_vmem=64G
 #$ -cwd
 #$ -j y
