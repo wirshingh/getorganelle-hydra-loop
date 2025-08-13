@@ -2,7 +2,7 @@
 ### Summary
 This scritp will run getorganelle on hydra using trimmed reads in a loop. Results for all samples will be in a directory named 'getorganelle_All_results'. Within this directory will be results for each sample in directories labeled with sample IDs followed by '_getorganelle_results'.
 
-After getorganelle is run, the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These renamed contigs will be in a directory named 'mt_contigs' within the 'getorganelle_All_results' directory.
+After getorganelle is run, PART 2 of the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These renamed contigs will be in a directory named 'mt_contigs' within the 'getorganelle_All_results' directory.
 
 For instuctions on how to run the job, see 'To Run the Job' below.
 
