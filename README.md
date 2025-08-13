@@ -51,37 +51,32 @@ get_organelle_from_reads.py \
 -t $NSLOTS
 done
 
-# Extra steps to rename output files with sample names
-# Create a directory for renamed output files
+# PART 2 - Extra steps to copy and rename output mito contig files with sample names
+# Create directory for renamed output files
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs
 
-# Loop over each R1 file matching the pattern
+# Loop over R1 files
 for GETSAMPLENAME in ${SAMPLEDIR_TRM}/*_R1_PE_trimmed.fastq.gz; do
-SAMPLENAME=$(basename "$GETSAMPLENAME" _R1_PE_trimmed.fastq.gz)
+    SAMPLENAME=$(basename "$GETSAMPLENAME" _R1_PE_trimmed.fastq.gz)
 
-# Copy final mitochondrial contigs to a new directory called "mt_contigs"
-cp ${SAMPLEDIR_BASE}/getorganelle_All_results/${SAMPLENAME}_getorganelle_results/*.path_sequence.fasta ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs
+    # Get the path to the .path_sequence.fasta file
+    src_file=$(ls ${SAMPLEDIR_BASE}/getorganelle_All_results/${SAMPLENAME}_getorganelle_results/*.path_sequence.fasta | head -n 1)
 
-# Rename copied mitochondrial contigs with sample name and "_mt_contigs.fasta"
-mv ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*.path_sequence.fasta ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/${SAMPLENAME}_mt_contigs.fasta
+    # Copy and rename
+    cp "$src_file" ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/${SAMPLENAME}_mt_contigs.fasta
 done
 
-# Rename internal text of mitochondrial contigs with sample name after the > in fasta files
-# Loop through each renamed fasta file in the 'mt_contigs' directory
-for input_file in ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*.fasta; do
-    # Extract the filename without the extension
+# Rename internal headers in fasta files
+for input_file in ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*_mt_contigs.fasta; do
     filename=$(basename "$input_file" .fasta)
-    
-    # Create the output file name
     renamed_contigs="${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/${filename}_renamed.fasta"
-    
-    # Process the file and insert the filename after each '>'
-    awk -v fname="$filename" '{gsub(/>/, ">" fname)}1' "$input_file" > "$renamed_contigs"
-    
+
+    # Modify only header lines
+    awk -v fname="$filename" '/^>/ {$0=">"fname"_"substr($0,2)} {print}' "$input_file" > "$renamed_contigs"
 done
 
-# Remove old files
-rm ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*_contigs.fasta
+# Remove original unrenamed fasta files
+rm ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*_mt_contigs.fasta
 
 echo "All files renamed and processed."
 
