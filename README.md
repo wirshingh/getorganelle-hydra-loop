@@ -52,6 +52,7 @@ get_organelle_from_reads.py \
 done
 
 # PART 2 - Extra steps to copy and rename output mito contig files with sample names
+#
 # Create directory for renamed output files
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs
 
