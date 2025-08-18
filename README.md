@@ -54,7 +54,7 @@ done
 # PART 2 - Extra steps to copy and rename output mito contig files with sample names
 #
 # Create directory for renamed output files
-mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs
+mkdir -p ${SAMPLEDIR_BASE}/getorganelle_final_mito_contigs
 
 # Loop over R1 files
 for GETSAMPLENAME in ${SAMPLEDIR_TRM}/*_R1_PE_trimmed.fastq.gz; do
@@ -64,24 +64,25 @@ for GETSAMPLENAME in ${SAMPLEDIR_TRM}/*_R1_PE_trimmed.fastq.gz; do
     src_file=$(ls ${SAMPLEDIR_BASE}/getorganelle_All_results/${SAMPLENAME}_getorganelle_results/*.path_sequence.fasta | head -n 1)
 
     # Copy and rename
-    cp "$src_file" ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/${SAMPLENAME}_mt_contigs.fasta
+    cp "$src_file" ${SAMPLEDIR_BASE}/getorganelle_final_mito_contigs/${SAMPLENAME}_getorganelle_final_mito_contig.fasta
 done
 
 # Rename internal headers in fasta files
-for input_file in ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*_mt_contigs.fasta; do
+for input_file in ${SAMPLEDIR_BASE}/getorganelle_final_mito_contigs/*_getorganelle_final_mito_contig.fasta; do
     filename=$(basename "$input_file" .fasta)
-    renamed_contigs="${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/${filename}_renamed.fasta"
+    renamed_contigs="${SAMPLEDIR_BASE}/getorganelle_final_mito_contigs/${filename}_renamed.fasta"
 
     # Modify only header lines
     awk -v fname="$filename" '/^>/ {$0=">"fname"_"substr($0,2)} {print}' "$input_file" > "$renamed_contigs"
 done
 
 # Remove original unrenamed fasta files
-rm ${SAMPLEDIR_BASE}/getorganelle_All_results/mt_contigs/*_mt_contigs.fasta
+rm ${SAMPLEDIR_BASE}/getorganelle_final_mito_contigs/*_getorganelle_final_mito_contig.fasta
 
 echo "All files renamed and processed."
 
 echo = `date` job $JOB_NAME
+
 
 ```
 
