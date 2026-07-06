@@ -26,11 +26,10 @@ module load bio/getorganelle
 echo + `date` job $JOB_NAME started in $QUEUE with jobID=$JOB_ID on $HOSTNAME
 echo + NSLOTS = $NSLOTS
 
-
 # Set sample directory path to trimmed reads
 SAMPLEDIR_TRM="path to trimmed reads directory"
 
-# Set sample directory path to the base project directory
+# Set sample directory path to the base project directory. This is where the results will be.
 SAMPLEDIR_BASE="path to base project directory, where the job file is."  
 
 # Make a results directory
