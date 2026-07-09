@@ -29,8 +29,8 @@ echo + NSLOTS = $NSLOTS
 # Set sample directory path to trimmed reads
 SAMPLEDIR_TRM="path to trimmed reads directory"
 
-# Set sample directory path to the base project directory. This is where the results will be.
-SAMPLEDIR_BASE="path to base project directory, where the job file is."  
+# Set sample directory path to the base project directory. This is where the results will go.
+SAMPLEDIR_BASE="path to base project directory"  
 
 # Make a results directory
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/
