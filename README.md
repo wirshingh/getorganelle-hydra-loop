@@ -96,7 +96,7 @@ After the '=' paste the full path to the trimmed reads directory.
 
 2. SAMPLEDIR_BASE="path to base project directory, where the job file is."
 
-After the '=' paste the full path to base directory. This directory is where the job file is located. The results will be located in this directory.
+After the '=' paste the full path to base directory. This is where the results will go.
 
 After making the changes above, save the job file as 'getorganelle_loop.job' and submit it on hydra (qsub getorganelle_loop.job).
 
