@@ -2,7 +2,7 @@
 ### Summary
 This scritp will run getorganelle on hydra using trimmed reads in a loop. Results for all samples will be in a directory named 'getorganelle_All_results'. Within this directory will be results for each sample in directories labeled with sample IDs followed by '_getorganelle_results'.
 
-After getorganelle is run, PART 2 of the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These renamed contigs will be in a directory named 'mt_contigs'.
+After getorganelle is run, PART 3 of the script contains commands that will copy the final mitochondrial contig (or scaffolds) and rename it with sample IDs. These renamed contigs will be in a directory named 'getorganelle_final_mito_contigs'.
 
 For instuctions on how to run the job, see 'To Run the Job' below.
 
@@ -26,14 +26,27 @@ module load bio/getorganelle
 echo + `date` job $JOB_NAME started in $QUEUE with jobID=$JOB_ID on $HOSTNAME
 echo + NSLOTS = $NSLOTS
 
+
+#============================================================================
+# CONFIGURATION
+#============================================================================
+
 # Set sample directory path to trimmed reads
 SAMPLEDIR_TRM="path to trimmed reads directory"
 
 # Set sample directory path to the base project directory. This is where the results will go.
 SAMPLEDIR_BASE="path to base project directory"  
 
+#============================================================================
+# PART 1 - CREATE OUTPUT DIRECTORY
+#============================================================================
+
 # Make a results directory
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_All_results/
+
+#============================================================================
+# PART 2 - RUN GETORGANELLE IN A LOOP USING TRIMMED READS
+#============================================================================
 
 # Loop over each R1 file matching the pattern
 for GETSAMPLENAME in ${SAMPLEDIR_TRM}/*_R1_PE_trimmed.fastq.gz; do
@@ -50,8 +63,10 @@ get_organelle_from_reads.py \
 -t $NSLOTS
 done
 
-# PART 2 - Extra steps to copy and rename output mito contig files with sample names
-#
+#============================================================================
+# PART 3 - COPY AND RENAME OUTPUT CONTIG FILES WITH SAMPLE NAMES
+#============================================================================
+
 # Create directory for renamed output files
 mkdir -p ${SAMPLEDIR_BASE}/getorganelle_final_mito_contigs
 
@@ -82,13 +97,12 @@ echo "All files renamed and processed."
 
 echo = `date` job $JOB_NAME
 
-
 ```
 
 ### To Run the Job
 The trimmed reads files must end in '_R1_PE_trimmed.fastq.gz' (forward) and '_R2_PE_trimmed.fastq.gz' (reverse) for the job to work. Alternatively, the job file can be edited to match the trimmed R1 and R2 file names.
 
-Add these items to the script.
+Under CONFIGURATION add these items to the script.
 
 1. SAMPLEDIR_TRM="path to trimmed reads directory"
 
